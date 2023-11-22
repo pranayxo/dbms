@@ -1,0 +1,470 @@
+1. Create student database and save it.
+
+CREATE DATABASE Student;
+
+--2. Create multiple tables for student database.
+
+USE Student;
+
+CREATE TABLE Student (
+
+Roll_no INTEGER,
+
+Stud_name VARCHAR(255),
+
+Percentage INTEGER
+
+);
+
+CREATE TABLE Course (
+
+Course_no INTEGER,
+
+Course_name VARCHAR(255),
+
+Instructor VARCHAR(255)
+
+);
+
+CREATE TABLE Enrollment (
+
+Roll_no INTEGER,
+
+Course_no INTEGER,
+
+Grade CHAR(1)
+
+);
+
+--3. Create multiple tables in database Emp and rename it.
+
+CREATE DATABASE Emp;
+
+USE Emp;
+
+CREATE TABLE Employee (
+
+Emp_no INTEGER,
+
+E_name VARCHAR(255),
+
+Dept_no INTEGER,
+
+Dept_name VARCHAR(255),
+
+Job_id INTEGER,
+
+Salary INTEGER
+
+);
+
+RENAME TABLE Employee TO Emp;
+
+--4. Create table Employee with following schema:
+
+--Emp( Emp_no PRIMARY KEY, E_name, Dept_no, Dept_name, Job_id, Salary)
+
+CREATE TABLE Emp (
+
+Emp_no INTEGER PRIMARY KEY,
+
+E_name VARCHAR(255),
+
+Dept_no INTEGER,
+
+Dept_name VARCHAR(255),
+
+Job_id INTEGER,
+
+Salary INTEGER
+
+);
+
+--5. Create a table Employee and Department with following schema by 
+
+applying primary key and foreign
+
+--key:
+
+￼EnterEmp(Emp_no PRIMARY KEY, Emp_name, Salary, Phno)
+Dept(Dept_no PRIMARY KEY, Emp_name FOREIGN KEY, Dept_name, Location)
+CREATE TABLE Emp (
+Emp_no INTEGER PRIMARY KEY,
+Emp_name VARCHAR(255),
+Salary INTEGER,
+Phno INTEGER
+);
+CREATE TABLE Dept (
+Dept_no INTEGER PRIMARY KEY,
+Emp_name INTEGER FOREIGN KEY REFERENCES Emp(Emp_no),
+Dept_name VARCHAR(255),
+Location VARCHAR(255)
+);
+--6. Create a table for students using attributes ( Roll_no, Stud_name, 
+Percentage) apply PRIMARY KEY
+--for roll no and CHECK constrain on percentage should be greater than 
+100.
+CREATE TABLE Student (
+Roll_no INTEGER PRIMARY KEY,
+Stud_name VARCHAR(255),
+Percentage INTEGER,
+CHECK (Percentage > 100)
+);
+--7. Change the student table structure by adding column City.
+ALTER TABLE Student ADD City VARCHAR(255);
+--8. Increase the size of student table by 10 of student name column.
+ALTER TABLE Student MODIFY Stud_name VARCHAR(265);
+--9. Create table Employee with following schema:
+--Emp( Emp_no, E_name, Dept_no, Dept_name, Job_id, Salary, Hiredate)
+--Insert multiple rows in above table Employee using single command of 
+SQL.
+CREATE TABLE Emp (
+Emp_no INTEGER,
+E_name VARCHAR(255),
+Dept_no INTEGER,
+Dept_name VARCHAR(255),
+Job_id INTEGER,
+Salary INTEGER,
+Hiredate DATE
+);
+INSERT INTO Emp (Emp_no, E_name, Dept_no, Dept_name, Job_id, Salary, 
+Hiredate)
+VALUES (1, 'John', 10, 'Sales', 1, 30000, '2022-01-01'),
+(2, 'Jane', 20, 'Marketing', 2, 35000, '2022-02-01'),
+(3, 'Bob', 30, 'IT', 3, 40000, '2022-03-01'),
+(4, 'Alice', 40, 'HR', 4, 45000, '2022-04-01');
+
+VALUES (1, 'John', 30000, 1234567890),
+(2, 'Jane', 35000, 1234567891),
+(3, 'Bob', 40000, 1234567892),
+(4, 'Alice', 45000, 1234567893),
+(5, 'Tom', 50000, 1234567894);
+INSERT INTO Dept (Dept_no, Dept_name, Location, Job_id)
+VALUES (10, 'Sales', 'New York', 1),
+(20, 'Marketing', 'Chicago', 2),
+(30, 'IT', 'San Francisco', 3),
+(40, 'HR', 'Los Angeles', 4),
+(50, 'Finance', 'Dallas', 5);
+--20. Display information for both tables.
+SELECT * FROM Emp;
+SELECT * FROM Dept;
+--21. Update deptno of employee Shreyas to 201
+UPDATE Emp SET Dept_no = 201 WHERE Emp_name = 'Shreyas';
+--22. Delete the information of employees belonging to department.
+DELETE FROM Emp WHERE Dept_no IN (SELECT Dept_no FROM Dept);
+--23. Display the information of Employee and Department and analyze the 
+difference.
+SELECT * FROM Emp;
+SELECT * FROM Dept;
+--24. Create the table EMPLOYEE
+--Emp(Emp_no, E_name,, Dept_no, Dept_name,Job_id, Salary,hiredate).
+CREATE TABLE Emp (
+Emp_no INTEGER,
+E_name VARCHAR(255),
+Dept_no INTEGER,
+Dept_name VARCHAR(255),
+Job_id INTEGER,
+Salary INTEGER,
+Hiredate DATE
+);
+--25. Select E_name,(Salary*.20) as Incremented_Salary from Emp;
+SELECT E_name, (Salary * 0.20) AS Incremented_Salary FROM Emp;
+--26. Select E_name ,Emp_no from Emp where Salary <=50000 and >=25000;
+SELECT E_name, Emp_no FROM Emp WHERE Salary <= 50000 AND Salary >= 25000;
+--27. Select details of employess having salary more than Ashish Salary;
+SELECT * FROM Emp WHERE Salary > (SELECT Salary FROM Emp WHERE E_name = 
+'Ashish');
+--28. Select * from Emp where Dept_no < > 201;
+SELECT * FROM Emp WHERE Dept_no <> 201;
+--29. Consider the table EMPLOYEE and DEPARTMENT
+Emp(Emp_no, E_name,, Dept_no, Dept_name,Job_id, Salary,hiredate).
+
+--Dept(E_ name,Dept_no,Location,job_id);
+
+CREATE TABLE Emp (
+
+Emp_no INTEGER,
+
+E_name VARCHAR(255),
+
+Dept_no INTEGER,
+
+Dept_name VARCHAR(255),
+
+Job_id INTEGER,
+
+Salary INTEGER,
+
+Hiredate DATE
+
+);
+
+CREATE TABLE Dept (
+
+E_name VARCHAR(255),
+
+Dept_no INTEGER,
+
+Location VARCHAR(255),
+
+Job_id INTEGER
+
+);
+
+--30. Select * from Emp union Select * from Dept;
+
+SELECT * FROM Emp
+
+UNION
+
+SELECT * FROM Dept;
+
+--31. Select * from Emp intersect Select * from Dept;
+
+SELECT * FROM Emp
+
+INTERSECT
+
+SELECT * FROM Dept;
+
+--32. Select * from Emp minus Select * from Dept;
+
+SELECT * FROM Emp
+
+MINUS
+
+SELECT * FROM Dept;
+
+--33. Select* from Emp where salary Emp_no between 100 and 200;
+
+SELECT * FROM Emp WHERE salary BETWEEN 100 AND 200;
+
+--34. Select* from Emp where E_name IN('Shreyas');
+
+SELECT * FROM Emp WHERE E_name IN ('Shreyas');
+
+--35. Consider the table EMPLOYEE and DEPARTMENT
+
+--Emp(Emp_no, E_name,, Dept_no, Dept_name,Job_id, Salary,hiredate).
+
+--Dept(E_name,Dept_no,Location);
+
+CREATE TABLE Emp (
+
+Emp_no INTEGER,
+
+E_name VARCHAR(255),
+
+Dept_no INTEGER,
+
+Dept_name VARCHAR(255),
+
+Job_id INTEGER,
+
+Salary INTEGER,
+
+Hiredate DATE
+
+);
+
+CREATE TABLE Dept (
+E_name VARCHAR(255),
+Dept_no INTEGER,
+Location VARCHAR(255)
+);
+--36. Display the name of employees who does not work under any Job_id=2.
+SELECT E_name FROM Emp WHERE Job_id <> 2;
+--37. Display names of all employees whose name is exactly 6 characters 
+long.
+SELECT E_name FROM Emp WHERE LENGTH(E_name) = 6;
+--38. List all employees information except job_id =2 and job_id=3.
+SELECT * FROM Emp WHERE Job_id NOT IN (2, 3);
+--39. List the employee name and salary whose salary is not in the range 
+of 20000 to 35000.
+SELECT E_name, Salary FROM Emp WHERE Salary NOT BETWEEN 20000 AND 35000;
+--40. List Common E_name from Emp and Dept Tables.
+SELECT E_name FROM Emp
+INTERSECT
+SELECT E_name FROM Dept;
+--41. Display the name of employee whose salary becomes more than 50000 
+after giving 15% increment.
+SELECT E_name FROM Emp WHERE Salary * 1.15 > 50000;
+--42. Select abs(-15) from dual;
+SELECT ABS(-15) FROM DUAL;
+--43. Select exp(4) from dual;
+SELECT EXP(4) FROM DUAL;
+--44. Select power(4,2) from dual;
+SELECT POWER(4, 2) FROM DUAL;
+--45. Select mod(10,3) from dual;
+SELECT MOD(10, 3) FROM DUAL;
+--46. Select sqrt(16) from dual;
+SELECT SQRT(16) FROM DUAL;
+--47. Select concat('Shreyas','NBA')from dual;
+SELECT CONCAT('Shreyas', 'NBA') FROM DUAL;
+--48. Select ltrim('shreyasss','s ')from dual;
+SELECT LTRIM('shreyasss', 's ') FROM DUAL;
+--49. Select rtrim('shreyasss','s')from dual;
+SELECT RTRIM('shreyasss', 's') FROM DUAL;
+--50. Select lower('SALES')from dual;
+SELECT LOWER('SALES') FROM DUAL;
+
+51. Select sysdate from dual;
+
+SELECT SYSDATE FROM DUAL;
+
+--52. Select next_day(sysdate,'thur')from dual;
+
+SELECT NEXT_DAY(SYSDATE, 'THUR') FROM DUAL;
+
+--53. Select add_months(sysdate,2)from dual;
+
+SELECT ADD_MONTHS(SYSDATE, 2) FROM DUAL;
+
+--54. Select last_day(sysdate)from dual;
+
+SELECT LAST_DAY(SYSDATE) FROM DUAL;
+
+--55. Select months_between(sysdate,hiredate)from Emp;
+
+SELECT MONTHS_BETWEEN(SYSDATE, HIREDATE) FROM Emp;
+
+--56. Consider the table EMPLOYEE and DEPARTMENT
+
+--Emp(Emp_no, E_name,, Dept_no, Dept_name,Job_id, Salary,hiredate).
+
+--57. Display maximum and minimum salary of employees.
+
+SELECT MAX(Salary) AS Max_Salary, MIN(Salary) AS Min_Salary FROM Emp;
+
+--58. Display total employees in sales department with its location.
+
+SELECT COUNT(*) AS Total_Employees, Location FROM Emp
+
+JOIN Dept ON Emp.Dept_no = Dept.Dept_no
+
+WHERE Dept_name = 'Sales'
+
+GROUP BY Location;
+
+--59. Create a tables EMPLOYEE and DEPARTMENT with following schema:
+
+--Emp(empno ,empname, salary, phno)
+
+--Dept(deptno, empno, deptname,location,jobtype)
+
+CREATE TABLE Emp (
+
+Emp_no INTEGER,
+
+Emp_name VARCHAR(255),
+
+Salary INTEGER,
+
+Phno VARCHAR(255)
+
+);
+
+CREATE TABLE Dept (
+
+Dept_no INTEGER,
+
+Emp_no INTEGER,
+
+Dept_name VARCHAR(255),
+
+Location VARCHAR(255),
+
+Jobtype VARCHAR(255)
+
+);
+
+--60. Display details of employees with the employee name in ascending 
+
+order.
+
+SELECT * FROM Emp ORDER BY Emp_name ASC;
+
+--61. Display minimum salary of employee from every department.
+
+SELECT Dept_name, MIN(Salary) AS Min_Salary FROM Emp
+
+JOIN Dept ON Emp.Dept_no = Dept.Dept_no
+
+GROUP BY Dept_name;
+
+62. Create a tables EMPLOYEE and DEPARTMENT with following schema:
+--Emp(empno ,empname, salary, phno)
+--Dept(deptno, empno, deptname,location,jobtype)
+CREATE TABLE Emp (
+Emp_no INTEGER,
+Emp_name VARCHAR(255),
+Salary INTEGER,
+Phno VARCHAR(255)
+);
+CREATE TABLE Dept (
+Dept_no INTEGER,
+Emp_no INTEGER,
+Dept_name VARCHAR(255),
+Location VARCHAR(255),
+Jobtype VARCHAR(255)
+);
+--63. Display lowest paid employee details under each department
+SELECT Emp_name, Salary, Dept_name FROM Emp
+JOIN Dept ON Emp.Dept_no = Dept.Dept_no
+WHERE Salary = (SELECT MIN(Salary) FROM Emp WHERE Emp.Dept_no = 
+Dept.Dept_no);
+--64. Display the details of employees earning salary greater than 60000 
+from every department
+SELECT Emp_name, Salary, Dept_name FROM Emp
+JOIN Dept ON Emp.Dept_no = Dept.Dept_no
+WHERE Salary > 60000;
+--65. Create Dept VIEW on Dept table.
+CREATE VIEW Dept AS
+SELECT * FROM Dept;
+--66. Delete VIEW dept view.
+DROP VIEW Dept;
+--67. Write PL/SQL program to display 1 to 10 numbers in reverse order 
+using loop.
+BEGIN
+FOR i IN REVERSE 1..10 LOOP
+DBMS_OUTPUT.PUT_LINE(i);
+END LOOP;
+END;
+--68. Create a table EMPLOYEE with following schema:
+--Emp(empno ,empname, deptname, salary, phno)
+--and Write a PL/SQL program for displaying details of employees working 
+in computer department
+--using CURSOR.
+CREATE TABLE Emp (
+Emp_no INTEGER,
+Emp_name VARCHAR(255),
+
+Dept_name VARCHAR(255),
+Salary INTEGER,
+Phno VARCHAR(255)
+);
+DECLARE
+CURSOR emp_cursor IS
+SELECT * FROM Emp WHERE Dept_name = 'Computer';
+emp_record Emp%ROWTYPE;
+BEGIN
+OPEN emp_cursor;
+FETCH emp_cursor INTO emp_record;
+WHILE emp_cursor%FOUND LOOP
+DBMS_OUTPUT.PUT_LINE(emp_record.Emp_name || ' ' || emp_record.Salary);
+FETCH emp_cursor INTO emp_record;
+END LOOP;
+CLOSE emp_cursor;
+END;
+--69. Write a function to calculate factorial of given number.
+CREATE OR REPLACE FUNCTION factorial (n INTEGER) RETURN INTEGER
+AS
+result INTEGER;
+BEGIN
+IF n = 0 THEN
+result := 1;
+ELSE
+result := n * factorial(n-1);
+END IF;
+RETURN result;
+END;
